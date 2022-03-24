@@ -1,5 +1,10 @@
-let defaultSize = 2;
+let defaultSize = 8;
+let color = '#000';
+
+
+
 const gridElements = document.getElementsByClassName('square');
+const rainbowBtn = document.getElementById('rainbowBtn');
 const container = document.querySelector('.container');
 
 const body = document.querySelector('body');
@@ -18,9 +23,8 @@ let output = document.getElementById('range');
 output.innerHTML = slider.value;
 
 
-
-//create Grid function and range slider functionality
-function createGrid(defaultSize) {
+//create grid and range slider functionality
+function createGrid(defaultSize, color) {
     // Add square divs to container
     for (let i = 0; i < defaultSize * defaultSize; i++) {
         let square = document.createElement('div');
@@ -31,14 +35,14 @@ function createGrid(defaultSize) {
     const squares = document.querySelectorAll('.square');
     squares.forEach((square) => {
         square.addEventListener('mouseenter', (event) => {
-            event.target.style.backgroundColor = "#000";
+            event.target.style.backgroundColor = color;
         });
     });
 
     container.style.gridTemplateColumns = `repeat(${defaultSize}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${defaultSize}, 1fr)`;
 
-
+    // Slider functionality
     slider.oninput = function () {
         output.innerHTML = this.value;
         for (let i = 0; i < gridElements.length; i++) {
