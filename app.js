@@ -1,10 +1,7 @@
 let defaultSize = 8;
-let color = '#000';
-
 
 
 const gridElements = document.getElementsByClassName('square');
-const rainbowBtn = document.getElementById('rainbowBtn');
 const container = document.querySelector('.container');
 
 const body = document.querySelector('body');
@@ -35,7 +32,7 @@ function createGrid(defaultSize, color) {
     const squares = document.querySelectorAll('.square');
     squares.forEach((square) => {
         square.addEventListener('mouseenter', (event) => {
-            event.target.style.backgroundColor = color;
+            event.target.style.backgroundColor = '#000';
         });
     });
 
