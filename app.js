@@ -1,59 +1,68 @@
-const body = document.querySelector('body');
-// Create h1 element
-const h1 = document.createElement('h1')
-h1.textContent = 'Etc A Sketch';
-body.appendChild(h1);
+let defaultSize = 2;
+const gridElements = document.getElementsByClassName('square');
+const container = document.querySelector('.container');
 
-//Ceate Wrapper
-const wrapper = document.createElement('div');
-body.appendChild(wrapper);
-//Create Settings
-const settings = document.createElement('div');
-settings.classList.add('settings');
-wrapper.appendChild(settings);
+const body = document.querySelector('body');
 
 //Reset Button
-const button = document.createElement('button');
-button.classList.add('button');
-button.setAttribute('id', 'reset');
-button.textContent = "Clear"
-settings.appendChild(button);
-
 const reset = document.getElementById('reset');
-reset.addEventListener('click',(event) => {
-    const gridElements = document.getElementsByClassName('square');
+reset.addEventListener('click', (event) => {
     for (let i = 0; i < gridElements.length; i++) {
         gridElements[i].style.backgroundColor = "";
-
     }
 })
 
-//Rainbow Button
-const button1 = document.createElement('button');
-button1.classList.add('button');
-button1.textContent = "Rainbow";
-settings.appendChild(button1);
-
-// Create container inside wrapper
-const container = document.createElement('div');
-wrapper.classList.add('wrapper');
-container.classList.add('container');
-
-wrapper.appendChild(container);
+//Range Slider
+let slider = document.getElementById("myRange");
+let output = document.getElementById('range');
+output.innerHTML = slider.value;
 
 
 
-//Add square divs to container
-for (let i = 0; i < 64; i++) {
-    let square = document.createElement('div');
-    square.classList.add('square')
-    container.appendChild(square);
+//create Grid function and range slider functionality
+function createGrid(defaultSize) {
+    // Add square divs to container
+    for (let i = 0; i < defaultSize * defaultSize; i++) {
+        let square = document.createElement('div');
+        square.classList.add('square')
+        container.appendChild(square);
+    }
+
+    const squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+        square.addEventListener('mouseenter', (event) => {
+            event.target.style.backgroundColor = "#000";
+        });
+    });
+
+    container.style.gridTemplateColumns = `repeat(${defaultSize}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${defaultSize}, 1fr)`;
+
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+        for (let i = 0; i < gridElements.length; i++) {
+            gridElements[i].style.backgroundColor = "";
+        }
+
+        for (let i = 0; i < this.value * this.value; i++) {
+            let square = document.createElement('div');
+            square.classList.add('square')
+            container.appendChild(square);
+        }
+
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.addEventListener('mouseenter', (event) => {
+                event.target.style.backgroundColor = "#000";
+            });
+        });
+        container.style.gridTemplateColumns = `repeat(${this.value}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${this.value}, 1fr)`;
+    }
 }
 
-const squares = document.querySelectorAll('.square');
-squares.forEach((square) => {
-    square.addEventListener('mouseenter', (event) => {
-        event.target.style.backgroundColor = "#000";
-    });
-});
 
+window.onload = () => {
+    createGrid(defaultSize);
+}

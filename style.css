@@ -7,19 +7,21 @@ body {
     justify-content: center;
 }
 
+/* Container grid */
 .container {
     width: 500px;
     height: 500px;
     border: 2px solid black;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    /* grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr); */
 }
 
 .square {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
+/* Settings */
 .settings {
     display: flex;
     flex-flow: column wrap;
@@ -33,3 +35,22 @@ body {
     font-size: 20px;
     margin: 8px 40px 8px 0;
 }
+
+.slider:hover {
+    opacity: 1;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 10px;
+    background: #000;
+    cursor: pointer;
+    margin-right: 43px;
+  }
+
+  p {
+      margin-top: 0;
+      margin-right: 40px;
+  }
